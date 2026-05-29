@@ -1,0 +1,114 @@
+<!doctype html><html lang=ru><head><meta charset=utf-8>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+  html,body{margin:0;height:100%;font-family:'Inter',-apple-system,sans-serif;background:#0B0E14;overflow:hidden}
+  #c{width:100%;height:96vh}
+</style></head><body><div id=c></div><script>
+const XS=["#128", "#130", "#131", "#132", "#133", "#134", "#135", "#137", "#138", "#139", "#140", "#141", "#143", "#144", "#145", "#146", "#147", "#148"], RIVER_DATA=[{"name": "Редизайн/интерфейс", "data": [170, 79, 54, 83, 75, 83, 184, 66, 37, 67, 68, 64, 157, 60, 501, 439, 769, 116]}, {"name": "Подписка/цена", "data": [258, 91, 57, 82, 80, 133, 438, 122, 58, 101, 114, 138, 110, 33, 169, 87, 130, 26]}, {"name": "Моя волна/рекомендации", "data": [253, 120, 66, 87, 81, 120, 277, 104, 48, 115, 117, 135, 133, 36, 305, 193, 345, 57]}, {"name": "Цензура", "data": [48, 17, 19, 31, 24, 113, 632, 113, 43, 74, 65, 91, 73, 15, 71, 35, 62, 8]}, {"name": "Баги/вылеты", "data": [108, 55, 29, 41, 32, 44, 88, 35, 22, 42, 47, 71, 54, 15, 85, 43, 89, 16]}, {"name": "ВПН/блокировки/РКН", "data": [42, 16, 13, 16, 18, 29, 112, 31, 12, 23, 22, 52, 24, 10, 40, 16, 20, 4]}, {"name": "Звук/качество", "data": [68, 27, 15, 22, 17, 23, 73, 20, 15, 23, 28, 37, 37, 6, 36, 15, 24, 5]}, {"name": "Реклама", "data": [40, 19, 8, 8, 12, 21, 42, 18, 8, 18, 17, 17, 21, 7, 34, 43, 39, 8]}], COL=["#FF3366", "#FF9900", "#3366FF", "#CC33FF", "#33FF66", "#00F5FF", "#EED202", "#8E929F"];
+const chart=echarts.init(document.getElementById('c'), null, {renderer: 'canvas'});
+
+function hexToRgbA(hex, alpha){
+  let c;
+  if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+      c= hex.substring(1).split('');
+      if(c.length== 3){
+          c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+      }
+      c= '0x' + c.join('');
+      return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+','+alpha+')';
+  }
+  return hex;
+}
+
+const series = RIVER_DATA.map((item, k) => ({
+  name: item.name,
+  type: 'line',
+  stack: 'Total',
+  smooth: true,
+  showSymbol: false,
+  lineStyle: {
+    width: 2,
+    color: COL[k],
+    shadowBlur: 8,
+    shadowColor: COL[k]
+  },
+  areaStyle: {
+    opacity: 0.65,
+    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+      { offset: 0, color: hexToRgbA(COL[k], 0.7) },
+      { offset: 1, color: hexToRgbA(COL[k], 0.02) }
+    ])
+  },
+  emphasis: {
+    focus: 'series',
+    lineStyle: {
+      width: 3,
+      shadowBlur: 15,
+      shadowColor: COL[k]
+    }
+  },
+  data: item.data
+}));
+
+const option = {
+  backgroundColor: '#0B0E14',
+  title: {
+    text: 'Поток жалоб по версиям',
+    subtext: 'Стек-площадь: толщина потока отражает объём жалоб в релизе',
+    left: 'center',
+    top: 15,
+    textStyle: { color: '#FFFFFF', fontFamily: 'Outfit, Inter, sans-serif', fontSize: 18, fontWeight: 700 },
+    subtextStyle: { color: '#94A3B8', fontFamily: 'Inter', fontSize: 12 }
+  },
+  tooltip: {
+    trigger: 'axis',
+    backgroundColor: 'rgba(15, 23, 42, 0.75)',
+    borderColor: 'rgba(255, 255, 255, 0.08)',
+    borderWidth: 1,
+    textStyle: { color: '#F1F5F9', fontFamily: 'Inter', fontSize: 12 },
+    extraCssText: 'backdrop-filter: blur(12px); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);',
+    axisPointer: {
+      type: 'line',
+      lineStyle: { color: 'rgba(255, 255, 255, 0.15)', type: 'dashed' }
+    }
+  },
+  legend: {
+    type: 'scroll',
+    top: '12%',
+    textStyle: { color: '#94A3B8', fontFamily: 'Inter', fontSize: 11 },
+    pageIconColor: '#3366FF',
+    pageIconInactiveColor: '#475569',
+    pageTextStyle: { color: '#94A3B8' }
+  },
+  grid: {
+    left: '4%',
+    right: '5%',
+    top: '22%',
+    bottom: '5%',
+    containLabel: true
+  },
+  xAxis: {
+    type: 'category',
+    boundaryGap: false,
+    data: XS,
+    axisLabel: { color: '#94A3B8', fontFamily: 'Inter', fontSize: 11 },
+    axisLine: { lineStyle: { color: 'rgba(255, 255, 255, 0.1)' } },
+    splitLine: { show: false }
+  },
+  yAxis: {
+    type: 'value',
+    name: 'Отзывов с темой',
+    nameTextStyle: { color: '#64748B', fontFamily: 'Inter', fontSize: 11, padding: [0, 0, 8, 0] },
+    axisLabel: { color: '#94A3B8', fontFamily: 'Inter', fontSize: 11 },
+    axisLine: { show: false },
+    splitLine: { lineStyle: { color: 'rgba(255, 255, 255, 0.05)' } }
+  },
+  series: series
+};
+
+chart.setOption(option);
+window.addEventListener('resize',()=>chart.resize());
+</script></body></html>

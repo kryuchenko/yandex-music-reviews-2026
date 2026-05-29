@@ -1,0 +1,262 @@
+<!doctype html><html lang=ru><head><meta charset=utf-8>
+<title>Яндекс.Музыка 2026 — отзывы Google Play</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@700;800;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/scrollama"></script>
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:'Inter', -apple-system, sans-serif;
+    color:#E2E8F0;
+    background:#0B0E14;
+    background:radial-gradient(circle at top right, #111827 0%, #0B0E14 60%);
+    overflow-x:hidden;
+  }
+  
+  /* Scroll Progress Bar */
+  .progress-bar-container { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: rgba(255,255,255,0.05); z-index: 1000; }
+  .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #FF9900, #FF3366, #CC33FF, #00F5FF); box-shadow: 0 0 10px rgba(255,51,102,0.8); transition: width 0.1s ease-out; }
+
+  header{
+    padding:80px 24px 40px;
+    text-align:center;
+    background:linear-gradient(180deg,#0d131f,#0B0E14);
+    border-bottom:1px solid rgba(255,255,255,0.03);
+  }
+  header h1{
+    font-family:'Outfit', sans-serif;
+    font-weight:900;
+    font-size:46px;
+    margin:0;
+    background: linear-gradient(135deg, #FF9900 0%, #FF3366 50%, #CC33FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 15px rgba(255, 51, 102, 0.25));
+    letter-spacing: -1px;
+  }
+  header p{
+    color:#94A3B8;
+    max-width:650px;
+    margin:15px auto 0;
+    font-size:16px;
+    line-height:1.6;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0 3px;
+  }
+  .badge.orange { background: rgba(255, 153, 0, 0.15); color: #FF9900; border: 1px solid rgba(255, 153, 0, 0.3); }
+  .badge.crimson { background: rgba(255, 51, 102, 0.15); color: #FF3366; border: 1px solid rgba(255, 51, 102, 0.3); }
+
+  .scrolly{
+    position:relative;
+    display:flex;
+    max-width:1350px;
+    margin:0 auto;
+    gap:36px;
+    padding:40px 24px 100px;
+  }
+  .narr{flex:0 0 380px}
+  .sticky{
+    flex:1;
+    position:sticky;
+    top:30px;
+    height:86vh;
+  }
+  .sticky iframe{
+    width:100%;
+    height:100%;
+    border:0;
+    border-radius:20px;
+    background:#0B0E14;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 245, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: opacity 0.25s ease, transform 0.3s ease;
+    opacity:1;
+  }
+  .sticky iframe.loading {
+    opacity: 0.15;
+    transform: scale(0.985);
+  }
+
+  .step{
+    min-height:80vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    background:rgba(23, 28, 36, 0.45);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    border:1px solid rgba(255, 255, 255, 0.04);
+    border-radius:16px;
+    padding:28px 30px;
+    margin:40px 0;
+    opacity:0.35;
+    transform:scale(0.97);
+    transition:all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  }
+  .step.is-active{
+    opacity:1;
+    transform:scale(1.02);
+    background:rgba(23, 28, 36, 0.7);
+    border:1px solid rgba(0, 245, 255, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 245, 255, 0.12);
+  }
+  .step h3{
+    margin:0 0 10px;
+    font-family:'Outfit', sans-serif;
+    font-size:24px;
+    font-weight:700;
+    color:#FFFFFF;
+    letter-spacing:-0.3px;
+  }
+  .step p{
+    color:#94A3B8;
+    line-height:1.6;
+    font-size:14.5px;
+    margin:0 0 16px;
+  }
+  
+  .roast{
+    background:rgba(255, 51, 102, 0.02);
+    border:1px solid rgba(255, 51, 102, 0.12);
+    border-radius:12px;
+    padding:14px 18px;
+    margin-top:18px;
+    position:relative;
+  }
+  .roast .rt{
+    font-weight:700;
+    color:#FF3366;
+    margin-bottom:8px;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-family:'Outfit', sans-serif;
+  }
+  .roast blockquote{
+    margin:8px 0;
+    padding:6px 12px;
+    border-left:3px solid #FF3366;
+    background:rgba(255, 51, 102, 0.03);
+    border-radius:0 8px 8px 0;
+    font-style:italic;
+    font-size:13px;
+    color:#E2E8F0;
+    line-height:1.45;
+    transition: all 0.3s ease;
+  }
+  .roast blockquote:hover {
+    transform: translateX(4px);
+    background: rgba(255, 51, 102, 0.06);
+  }
+  .roast blockquote span{
+    display:block;
+    margin-top:4px;
+    font-style:normal;
+    color:#64748B;
+    font-size:11px;
+    font-family:'JetBrains Mono', monospace;
+  }
+  
+  footer{
+    text-align:center;
+    padding:60px 20px 100px;
+    color:#64748B;
+    border-top:1px solid rgba(255,255,255,0.03);
+    background:linear-gradient(0deg,#0d131f,#0B0E14);
+  }
+  footer a{
+    color:#38BDF8;
+    text-decoration:none;
+    transition:color 0.2s;
+    font-weight:500;
+  }
+  footer a:hover{
+    color:#00F5FF;
+    text-decoration:underline;
+  }
+  
+  /* Scroll Indicator hint */
+  .scroll-hint {
+    margin-top: 30px;
+    font-size: 13px;
+    color: #64748B;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-6px); }
+    60% { transform: translateY(-3px); }
+  }
+
+  /* Custom scrollbar styling */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #0B0E14; }
+  ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #334155; }
+</style>
+</head>
+<body>
+<div class="progress-bar-container"><div class="progress-bar" id="myBar"></div></div>
+
+<header>
+  <h1>Яндекс.Музыка 2026: что говорят отзывы</h1>
+  <p>
+    Анализ <span class="badge orange">16 472 отзывов</span> с января по май. 
+    Средняя оценка изменилась с <span class="badge orange">3.2★</span> (январь) до <span class="badge crimson">1.7★</span> (май). Что произошло — смотрите ниже и судите сами.
+  </p>
+  <div class="scroll-hint">Листайте вниз ↓</div>
+</header>
+
+<div class="scrolly">
+  <div class="narr"><div class="step" data-src="wow/racing.html"><h3>🏁 Гонка жалоб по версиям</h3><p>Доля каждой темы в отзывах версии. Смотрите, как «Редизайн» вырывается вперёд на #135 и снова на #146–#147.</p><div class="roast"><div class="rt">🎨 Дизайнеру передать</div><blockquote>«Всё прекрасно. Но. Кто дизайнер данного приложения? Символы стали неприятны глазу. То же сердечко сейчас выглядит хуже, чем было раньше. Шрифт вот интересный. Но остальное... Хотел…» <span>— 21.05.2026 · 181 👍 · 1★</span></blockquote><blockquote>«КРУТИТЕ БАРАБАН! Дизайнеры не в курсе, почему от дисковых телефонов люди перешли к панели где все кнопки видно сразу? Новый интерфейс просто шиза. Иконки частично чёткие, часть раз…» <span>— 22.05.2026 · 53 👍 · 1★</span></blockquote><blockquote>«Вы куда из приложения спрятали абсолютно ВСЁ?! А можно перестать набирать дизайнеров в пансионатах для умственно отсталых? Или хотя бы перевести их на вещества полегче.» <span>— 21.05.2026 · 30 👍 · 1★</span></blockquote><blockquote>«ребята, верните старый приятный интерфейс. у вас что, дизайнер под ЛСД или у него шизофрения? этим же стало невозможно пользоваться.» <span>— 17.05.2026 · 22 👍 · 2★</span></blockquote></div></div><div class="step" data-src="wow/river.html"><h3>🌊 Поток жалоб во времени</h3><p>Толщина потока — объём темы. Видно, как русла «Редизайн», «Цензура» и «Платность» разбухают к новым релизам.</p><div class="roast"><div class="rt">✂️ Цензорам передать</div><blockquote>«огромного количества музыки вырезали!Можете дальше соблюдать санкции, только без моих денег!Плюс зачем мне в Яндекс Музыке выбирать категории кэшбэка?! зачем вы перегружайте все св…» <span>— 06.01.2026 · 69 👍 · 1★</span></blockquote><blockquote>«Когда уже Яндекс взгреют за то, что они дерут деньги с подписчиков и не предоставляют взамен ничего! Кто знает, куда на них жаловаться?Это что за платформа такая?! Вечно удаляют ин…» <span>— 16.02.2026 · 60 👍 · 1★</span></blockquote><blockquote>«А начиналось так красиво, но цензура сделала своё, нет ну можно сделать род. контроль или возрастной рейтинг для песен(что-то подобное же и так у вас есть) или убрать цензуру для г…» <span>— 21.05.2026 · 41 👍 · 1★</span></blockquote><blockquote>«цензура» <span>— 02.03.2026 · 18 👍 · 1★</span></blockquote></div></div><div class="step" data-src="wow/sunburst.html"><h3>☀️ Анатомия версии</h3><p>Версия → тема → подтема. Кликайте внутрь: из чего состоит недовольство каждого релиза. Цвет — средняя оценка.</p><div class="roast"><div class="rt">💸 Маркетологам передать</div><blockquote>«Уважаемые, разрабы! Нахрена мне ваша подписка "Яндекс плюс", если я только музыку слушаю? зачем мне переплачивать за сервисы, которые мне не нужны? Очень прискорбно осознавать, что…» <span>— 23.01.2026 · 370 👍 · 1★</span></blockquote><blockquote>«После очередного подорожания,я уже не вижу смысла в использовании вашего сервиса.при всех его накопившихся минусах. введите вы уже наконец модульную подписку на те сервисы что нужн…» <span>— 21.05.2026 · 10 👍 · 1★</span></blockquote><blockquote>«Прям достали со своей рекламой, супер новинками предложениями и тд. Нельзя просто открыть приложение и включить музыку, надо вначале найти крестики на всплывающей рекламе, и это пр…» <span>— 22.05.2026 · 9 👍 · 1★</span></blockquote><blockquote>«1. Невозможно создать свой плейлист (нужна обученная обезьяна которая будет вручную добавлять альбомы по 1 треку) 2. Я не открываю приложение банка, чтобы послушать музыку. Как и н…» <span>— 27.02.2026 · 6 👍 · 1★</span></blockquote></div></div><div class="step" data-src="wow/umap.html"><h3>🎬 Дрейф тона</h3><p>От нулевой линии вверх — позитив (зелёное), вниз — критика (красное). Слева направо зелёное усыхает, красное разбухает — «вода уходит под ноль». Белая линия — средняя оценка, ныряет на #135 и #147. Снизу — термометр среднего тона.</p><div class="roast"><div class="rt">🌊 Алгоритму «Моей волны»</div><blockquote>«Мою волну стало невозможно слушать из-за тонн нейрослопа, уже устал дизлайки прожимать. Спасибо за чудесную причину не продлевать вашу бесполезную подписку ;)» <span>— 27.04.2026 · 92 👍 · 1★</span></blockquote><blockquote>«с каждым разом приложение все хуже и хуже, подписка стоит космических цен, а за такую цену получаем половину удаленных треков, волна не работает нормально, каждый раз крутит одни и…» <span>— 05.03.2026 · 16 👍 · 1★</span></blockquote><blockquote>«отвратительная волна, очень узкий круг песен и музыки , каждый день предлагает одно и то же,удалил все треки и почистил кеш приложения, чсеравно опять одни и те же треки, почему то…» <span>— 04.01.2026 · 16 👍 · 1★</span></blockquote><blockquote>«Все замечательно, но Моя волна по моей коллекции выдает одни и те же песни раз за разом.» <span>— 18.05.2026 · 15 👍 · 3★</span></blockquote></div></div></div>
+  <div class="sticky"><iframe id="viz" src="wow/racing.html"></iframe></div>
+</div>
+
+  <a href="cloud_deckgl.html" target="_blank" rel="noopener" style="display:flex;gap:18px;align-items:center;max-width:900px;margin:34px auto;padding:24px 30px;background:linear-gradient(135deg,#171c24,#0f1420);border:1px solid #2a3340;border-radius:18px;text-decoration:none;color:#e8edf3;box-shadow:0 10px 40px rgba(0,0,0,.4)">
+    <div style="font-size:50px">🌌</div>
+    <div><div style="font-size:23px;font-weight:800;font-family:Outfit,Inter,sans-serif">3D-облако мнений</div>
+    <div style="color:#9aa4b2;margin-top:5px;line-height:1.5">16 472 отзыва в пространстве смысла: вращайте, зумьте, наводитесь на точки. Откроется на весь экран в новой вкладке →</div></div>
+  </a>
+
+<footer>Отзывы Google Play · январь–май 2026 · 16 472 отзыва · <a href="cloud_deckgl.html">🌌 3D-облако мнений</a></footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  document.getElementById('myBar').style.width = scrolled + '%';
+});
+
+const viz=document.getElementById('viz');
+const sc=scrollama();
+sc.setup({step:'.step',offset:0.55}).onStepEnter(r=>{
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('is-active'));
+  r.element.classList.add('is-active');
+  const src=r.element.dataset.src;
+  if(viz.getAttribute('src')!==src) {
+    viz.classList.add('loading');
+    setTimeout(() => {
+      viz.setAttribute('src',src);
+    }, 150);
+  }
+});
+
+viz.addEventListener('load', () => {
+  viz.classList.remove('loading');
+});
+
+window.addEventListener('resize',sc.resize);
+</script>
+</body>
+</html>
