@@ -525,6 +525,18 @@
         </div>
       </section>
       
+      <section class="step" data-src="wow/satisfaction.html">
+        <h3>📈 Структура оценок по дням</h3>
+        <p>Доля каждой оценки (в %) на протяжении времени. Посмотрите, как после релиза #135 и последующих обновлений багровое море из 1★ буквально затапливает график, вытесняя зелёный позитив.</p>
+        <div class="roast">
+          <div class="rt">💔 Хроника катастрофы</div>
+          <blockquote>«Последнее обновление просто дно. Испортили рабочий дизайн и концепцию, сделали полное позорище, лишь бы везде ИИ приплести.» <span>— 21.05.2026 · 1★</span></blockquote>
+          <blockquote>«Что за вредитель поганит ваши приложения? Сначала такси, сейчас изуродовали приложение музыки сделав его максимально запутанным и неудобным. Пропадает желание пользоваться.» <span>— 22.05.2026 · 1★</span></blockquote>
+          <blockquote>«последнее обновление дизайна - муйня полная... заканчивается месяц подписки, и я валю с этого сервиса... сами все испортили, к пользователям не прислушиваетесь, цены растут...» <span>— 28.05.2026 · 1★</span></blockquote>
+          <blockquote>«Последнее обновление отвратительно! Хочется поставить -5 звезд. Дизайн первой страницы просто худший из худших! У меня нет цензурных слов чтобы описать эмоции. Это ужас.» <span>— 21.05.2026 · 1★</span></blockquote>
+        </div>
+      </section>
+      
       <section class="step" data-src="wow/river.html">
         <h3>🌊 Поток жалоб во времени</h3>
         <p>Толщина потока — объём темы. Видно, как русла «Редизайн», «Цензура» и «Платность» разбухают к новым релизам.</p>
@@ -570,6 +582,7 @@
         <span>Загрузка интерактивной графики...</span>
       </div>
       <iframe id="viz-racing" class="viz-iframe active" src="wow/racing.html" title="Гонка тем по версиям"></iframe>
+      <iframe id="viz-satisfaction" class="viz-iframe" src="wow/satisfaction.html" title="Структура оценок по дням"></iframe>
       <iframe id="viz-river" class="viz-iframe" src="wow/river.html" title="Поток жалоб во времени"></iframe>
       <iframe id="viz-sunburst" class="viz-iframe" src="wow/sunburst.html" title="Анатомия версии"></iframe>
       <iframe id="viz-umap" class="viz-iframe" src="wow/umap.html" title="Дрейф тона"></iframe>
@@ -609,7 +622,7 @@
 
   // Preloader management for all stacked iframes
   let loadedIframes = 0;
-  const totalIframes = 4;
+  const totalIframes = 5;
   const loader = document.querySelector('.viz-loader');
 
   document.querySelectorAll('.viz-iframe').forEach(iframe => {
@@ -647,7 +660,9 @@
     const src = r.element.dataset.src;
     let targetId = 'viz-racing';
     
-    if (src.includes('river')) {
+    if (src.includes('satisfaction')) {
+      targetId = 'viz-satisfaction';
+    } else if (src.includes('river')) {
       targetId = 'viz-river';
     } else if (src.includes('sunburst')) {
       targetId = 'viz-sunburst';
