@@ -537,6 +537,16 @@
         </div>
       </section>
       
+      <section class="step" data-src="wow/tone.html">
+        <h3>🌡️ Средний тон отзывов по дням</h3>
+        <p>Общая тональность отзывов (от -1.0 до +1.0) по оценке ИИ-модели. Голубая линия — скользящее среднее. Отчетливо видно, как после февральского релиза тональность уходит глубоко в красную зону и так и не выбирается из неё.</p>
+        <div class="roast">
+          <div class="rt">🎭 Голос разума</div>
+          <blockquote>«Вы просто испортили приложение последним обновлением. Лишний раз не хочется заходить и пользоваться, сплошной негатив.» <span>— 23.05.2026 · 1★</span></blockquote>
+          <blockquote>«Разработчики, ну вы сами всё испортили! К пользователям не прислушиваетесь, цены на подписку растут, а качество и удобство сервиса стремительно сжимается.» <span>— 27.05.2026 · 1★</span></blockquote>
+        </div>
+      </section>
+      
       <section class="step" data-src="wow/river.html">
         <h3>🌊 Поток жалоб во времени</h3>
         <p>Толщина потока — объём темы. Видно, как русла «Редизайн», «Цензура» и «Платность» разбухают к новым релизам.</p>
@@ -583,6 +593,7 @@
       </div>
       <iframe id="viz-racing" class="viz-iframe active" src="wow/racing.html" title="Гонка тем по версиям"></iframe>
       <iframe id="viz-satisfaction" class="viz-iframe" src="wow/satisfaction.html" title="Структура оценок по дням"></iframe>
+      <iframe id="viz-tone" class="viz-iframe" src="wow/tone.html" title="Средний тон отзывов по дням"></iframe>
       <iframe id="viz-river" class="viz-iframe" src="wow/river.html" title="Поток жалоб во времени"></iframe>
       <iframe id="viz-sunburst" class="viz-iframe" src="wow/sunburst.html" title="Анатомия версии"></iframe>
       <iframe id="viz-umap" class="viz-iframe" src="wow/umap.html" title="Дрейф тона"></iframe>
@@ -622,7 +633,7 @@
 
   // Preloader management for all stacked iframes
   let loadedIframes = 0;
-  const totalIframes = 5;
+  const totalIframes = 6;
   const loader = document.querySelector('.viz-loader');
 
   document.querySelectorAll('.viz-iframe').forEach(iframe => {
@@ -662,6 +673,8 @@
     
     if (src.includes('satisfaction')) {
       targetId = 'viz-satisfaction';
+    } else if (src.includes('tone')) {
+      targetId = 'viz-tone';
     } else if (src.includes('river')) {
       targetId = 'viz-river';
     } else if (src.includes('sunburst')) {
