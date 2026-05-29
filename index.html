@@ -559,6 +559,16 @@
         </div>
       </section>
       
+      <section class="step" data-src="wow/censorship.html">
+        <h3>🛡️ Динамика темы «Цензура» во времени</h3>
+        <p>Распределение доли отзывов о цензуре по неделям (пурпурная область) на фоне изменения среднего тона этих отзывов по оценке ИИ-модели (голубая линия).</p>
+        <div class="roast">
+          <div class="rt">💬 Отзывы о цензуре и ограничениях</div>
+          <blockquote>«А начиналось так красиво, но цензура сделала своё, нет ну можно сделать род. контроль или возрастной рейтинг для песен или убрать цензуру для взрослых.» <span>— 21.05.2026 · 41 👍 · 1★</span></blockquote>
+          <blockquote>«запикали маты в треках, убрали оригиналы, слушать невозможно. За что я плачу подписку — за кастрированную музыку?» <span>— 15.05.2026 · 1★</span></blockquote>
+        </div>
+      </section>
+      
       <section class="step" data-src="wow/sunburst.html">
         <h3>☀️ Структура тем внутри версий</h3>
         <p>Иерархическая структура: версия → тема → подтема. Интерактивная диаграмма позволяет изучить состав отзывов для каждого релиза. Цвет отражает среднюю оценку.</p>
@@ -595,6 +605,7 @@
       <iframe id="viz-satisfaction" class="viz-iframe" src="wow/satisfaction.html" title="Структура оценок по дням"></iframe>
       <iframe id="viz-tone" class="viz-iframe" src="wow/tone.html" title="Средний тон отзывов по дням"></iframe>
       <iframe id="viz-river" class="viz-iframe" src="wow/river.html" title="Поток жалоб во времени"></iframe>
+      <iframe id="viz-censorship" class="viz-iframe" src="wow/censorship.html" title="Цензура во времени"></iframe>
       <iframe id="viz-sunburst" class="viz-iframe" src="wow/sunburst.html" title="Анатомия версии"></iframe>
       <iframe id="viz-umap" class="viz-iframe" src="wow/umap.html" title="Дрейф тона"></iframe>
     </div>
@@ -633,7 +644,7 @@
 
   // Preloader management for all stacked iframes
   let loadedIframes = 0;
-  const totalIframes = 6;
+  const totalIframes = 7;
   const loader = document.querySelector('.viz-loader');
 
   document.querySelectorAll('.viz-iframe').forEach(iframe => {
@@ -675,6 +686,8 @@
       targetId = 'viz-satisfaction';
     } else if (src.includes('tone')) {
       targetId = 'viz-tone';
+    } else if (src.includes('censorship')) {
+      targetId = 'viz-censorship';
     } else if (src.includes('river')) {
       targetId = 'viz-river';
     } else if (src.includes('sunburst')) {
