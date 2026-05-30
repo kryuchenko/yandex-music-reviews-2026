@@ -1,504 +1,212 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <title>Яндекс.Музыка 2026 — отзывы Google Play</title>
-  <meta name="description" content="Интерактивный анализ 16 472 отзывов пользователей о Яндекс.Музыке в Google Play за 2026 год. Узнайте причины падения рейтинга с 3.2★ до 1.7★.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html><html lang=ru><head><meta charset=utf-8>
+<title>Яндекс.Музыка 2026 — отзывы Google Play</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@700;800;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/scrollama"></script>
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:'Inter', -apple-system, sans-serif;
+    color:#E2E8F0;
+    background:#0B0E14;
+    background:radial-gradient(circle at top right, #111827 0%, #0B0E14 60%);
+    overflow-x:hidden;
+  }
   
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@700;800;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+  /* Scroll Progress Bar */
+  .progress-bar-container { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: rgba(255,255,255,0.05); z-index: 1000; }
+  .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #FF9900, #FF3366, #CC33FF, #00F5FF); box-shadow: 0 0 10px rgba(255,51,102,0.8); transition: width 0.1s ease-out; }
+
+  header{
+    padding:80px 24px 40px;
+    text-align:center;
+    background:linear-gradient(180deg,#0d131f,#0B0E14);
+    border-bottom:1px solid rgba(255,255,255,0.03);
+  }
+  header h1{
+    font-family:'Outfit', sans-serif;
+    font-weight:900;
+    font-size:46px;
+    margin:0;
+    background: linear-gradient(135deg, #FF9900 0%, #FF3366 50%, #CC33FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 15px rgba(255, 51, 102, 0.25));
+    letter-spacing: -1px;
+  }
+  header p{
+    color:#94A3B8;
+    max-width:650px;
+    margin:15px auto 0;
+    font-size:16px;
+    line-height:1.6;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0 3px;
+  }
+  .badge.orange { background: rgba(255, 153, 0, 0.15); color: #FF9900; border: 1px solid rgba(255, 153, 0, 0.3); }
+  .badge.crimson { background: rgba(255, 51, 102, 0.15); color: #FF3366; border: 1px solid rgba(255, 51, 102, 0.3); }
+
+  .scrolly{
+    position:relative;
+    display:flex;
+    max-width:1350px;
+    margin:0 auto;
+    gap:36px;
+    padding:40px 24px 100px;
+  }
+  .narr{flex:0 0 380px}
+  .sticky{
+    flex:1;
+    position:sticky;
+    top:30px;
+    height:86vh;
+  }
+  .sticky iframe{
+    width:100%;
+    height:100%;
+    border:0;
+    border-radius:20px;
+    background:#0B0E14;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 245, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: opacity 0.25s ease, transform 0.3s ease;
+    opacity:1;
+  }
+  .sticky iframe.loading {
+    opacity: 0.15;
+    transform: scale(0.985);
+  }
+
+  .step{
+    min-height:80vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    background:rgba(23, 28, 36, 0.45);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    border:1px solid rgba(255, 255, 255, 0.04);
+    border-radius:16px;
+    padding:28px 30px;
+    margin:40px 0;
+    opacity:0.35;
+    transform:scale(0.97);
+    transition:all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  }
+  .step.is-active{
+    opacity:1;
+    transform:scale(1.02);
+    background:rgba(23, 28, 36, 0.7);
+    border:1px solid rgba(0, 245, 255, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 245, 255, 0.12);
+  }
+  .step h3{
+    margin:0 0 10px;
+    font-family:'Outfit', sans-serif;
+    font-size:24px;
+    font-weight:700;
+    color:#FFFFFF;
+    letter-spacing:-0.3px;
+  }
+  .step p{
+    color:#94A3B8;
+    line-height:1.6;
+    font-size:14.5px;
+    margin:0 0 16px;
+  }
   
-  <script src="https://unpkg.com/scrollama"></script>
+  .roast{
+    background:rgba(255, 51, 102, 0.02);
+    border:1px solid rgba(255, 51, 102, 0.12);
+    border-radius:12px;
+    padding:14px 18px;
+    margin-top:18px;
+    position:relative;
+  }
+  .roast .rt{
+    font-weight:700;
+    color:#FF3366;
+    margin-bottom:8px;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-family:'Outfit', sans-serif;
+  }
+  .roast blockquote{
+    margin:8px 0;
+    padding:6px 12px;
+    border-left:3px solid #FF3366;
+    background:rgba(255, 51, 102, 0.03);
+    border-radius:0 8px 8px 0;
+    font-style:italic;
+    font-size:13px;
+    color:#E2E8F0;
+    line-height:1.45;
+    transition: all 0.3s ease;
+  }
+  .roast blockquote:hover {
+    transform: translateX(4px);
+    background: rgba(255, 51, 102, 0.06);
+  }
+  .roast blockquote span{
+    display:block;
+    margin-top:4px;
+    font-style:normal;
+    color:#64748B;
+    font-size:11px;
+    font-family:'JetBrains Mono', monospace;
+  }
   
-  <style>
-    * { box-sizing: border-box; }
-    
-    body {
-      margin: 0;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      color: #E2E8F0;
-      background: #0B0E14;
-      background: radial-gradient(circle at top right, #111827 0%, #0B0E14 60%);
-      overflow-x: hidden;
-      line-height: 1.5;
-    }
-    
-    /* Scroll Progress Bar */
-    .progress-bar-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: rgba(255, 255, 255, 0.03);
-      z-index: 1000;
-    }
-    
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #FF9900, #FF3366, #CC33FF, #00F5FF);
-      box-shadow: 0 0 12px rgba(255, 51, 102, 0.9);
-      transition: width 0.1s ease-out;
-    }
+  footer{
+    text-align:center;
+    padding:60px 20px 100px;
+    color:#64748B;
+    border-top:1px solid rgba(255,255,255,0.03);
+    background:linear-gradient(0deg,#0d131f,#0B0E14);
+  }
+  footer a{
+    color:#38BDF8;
+    text-decoration:none;
+    transition:color 0.2s;
+    font-weight:500;
+  }
+  footer a:hover{
+    color:#00F5FF;
+    text-decoration:underline;
+  }
+  
+  /* Scroll Indicator hint */
+  .scroll-hint {
+    margin-top: 30px;
+    font-size: 13px;
+    color: #64748B;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-6px); }
+    60% { transform: translateY(-3px); }
+  }
 
-    header {
-      padding: 100px 24px 50px;
-      text-align: center;
-      background: linear-gradient(180deg, #0D131F, #0B0E14);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-    }
-    
-    header h1 {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 900;
-      font-size: 52px;
-      margin: 0;
-      background: linear-gradient(135deg, #FF9900 0%, #FF3366 50%, #CC33FF 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 20px rgba(255, 51, 102, 0.3));
-      letter-spacing: -1.5px;
-    }
-    
-    header p {
-      color: #94A3B8;
-      max-width: 700px;
-      margin: 20px auto 0;
-      font-size: 17px;
-      line-height: 1.7;
-    }
-    
-    .badge {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 6px;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      font-size: 14px;
-      margin: 0 4px;
-      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease;
-    }
-    
-    .badge:hover {
-      transform: translateY(-2px) scale(1.06);
-    }
-    
-    .badge.orange {
-      background: rgba(255, 153, 0, 0.15);
-      color: #FF9900;
-      border: 1px solid rgba(255, 153, 0, 0.3);
-      box-shadow: 0 2px 10px rgba(255, 153, 0, 0.1);
-    }
-    
-    .badge.crimson {
-      background: rgba(255, 51, 102, 0.15);
-      color: #FF3366;
-      border: 1px solid rgba(255, 51, 102, 0.3);
-      box-shadow: 0 2px 10px rgba(255, 51, 102, 0.1);
-    }
-
-    .scrolly {
-      position: relative;
-      display: flex;
-      max-width: 1350px;
-      margin: 0 auto;
-      gap: 40px;
-      padding: 40px 24px 100px;
-    }
-    
-    .narr {
-      flex: 0 0 400px;
-      z-index: 5;
-    }
-    
-    .sticky {
-      flex: 1;
-      position: sticky;
-      top: 40px;
-      height: 84vh;
-      border-radius: 20px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 245, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      background: #0B0E14;
-      overflow: hidden;
-    }
-    
-    /* Layered Stacked Iframes */
-    .sticky .viz-iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-      background: #0B0E14;
-      opacity: 0;
-      pointer-events: none;
-      transform: scale(0.975);
-      transition: opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-      z-index: 1;
-    }
-    
-    .sticky .viz-iframe.active {
-      opacity: 1;
-      pointer-events: auto;
-      transform: scale(1);
-      z-index: 2;
-    }
-    
-    /* Spinner Preloader */
-    .viz-loader {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: #0B0E14;
-      color: #94A3B8;
-      font-size: 15px;
-      gap: 16px;
-      z-index: 10;
-      transition: opacity 0.4s ease;
-    }
-    
-    .spinner {
-      width: 40px;
-      height: 40px;
-      border: 3px solid rgba(0, 245, 255, 0.15);
-      border-top-color: #00F5FF;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .step {
-      min-height: 80vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background: rgba(23, 28, 36, 0.45);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      border-radius: 18px;
-      padding: 32px;
-      margin: 60px 0;
-      opacity: 0.3;
-      transform: scale(0.97);
-      transition: opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.5s ease, background 0.5s ease, box-shadow 0.5s ease;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    }
-    
-    .step.is-active {
-      opacity: 1;
-      transform: scale(1.02);
-      background: rgba(23, 28, 36, 0.75);
-      border-color: rgba(0, 245, 255, 0.35);
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 245, 255, 0.15);
-    }
-    
-    .step h3 {
-      margin: 0 0 12px;
-      font-family: 'Outfit', sans-serif;
-      font-size: 26px;
-      font-weight: 700;
-      color: #FFFFFF;
-      letter-spacing: -0.5px;
-    }
-    
-    .step p {
-      color: #94A3B8;
-      line-height: 1.65;
-      font-size: 15px;
-      margin: 0 0 20px;
-    }
-    
-    .roast {
-      background: rgba(255, 51, 102, 0.02);
-      border: 1px solid rgba(255, 51, 102, 0.12);
-      border-radius: 14px;
-      padding: 18px 20px;
-      margin-top: 10px;
-    }
-    
-    .roast .rt {
-      font-weight: 700;
-      color: #FF3366;
-      margin-bottom: 12px;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      font-family: 'Outfit', sans-serif;
-    }
-    
-    .roast blockquote {
-      margin: 12px 0;
-      padding: 8px 14px;
-      border-left: 3px solid #FF3366;
-      background: rgba(255, 51, 102, 0.03);
-      border-radius: 0 8px 8px 0;
-      font-style: italic;
-      font-size: 13.5px;
-      color: #E2E8F0;
-      line-height: 1.55;
-      transition: transform 0.25s ease, background-color 0.25s ease;
-    }
-    
-    .roast blockquote:hover {
-      transform: translateX(6px);
-      background-color: rgba(255, 51, 102, 0.07);
-    }
-    
-    .roast blockquote span {
-      display: block;
-      margin-top: 6px;
-      font-style: normal;
-      color: #64748B;
-      font-size: 11px;
-      font-family: 'JetBrains Mono', monospace;
-    }
-    
-    /* Modern Premium Cloud Card */
-    .cloud-card {
-      display: flex;
-      gap: 22px;
-      align-items: center;
-      max-width: 900px;
-      margin: 50px auto;
-      padding: 26px 32px;
-      background: linear-gradient(135deg, #171C24 0%, #0F1420 100%);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 20px;
-      text-decoration: none;
-      color: #E8EDF3;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-      transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease, box-shadow 0.4s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .cloud-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(255, 153, 0, 0.06) 0%, rgba(255, 51, 102, 0.06) 50%, rgba(0, 245, 255, 0.06) 100%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-    
-    .cloud-card:hover {
-      transform: translateY(-5px) scale(1.015);
-      border-color: rgba(0, 245, 255, 0.35);
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 245, 255, 0.12);
-    }
-    
-    .cloud-card:hover::before {
-      opacity: 1;
-    }
-    
-    .cloud-card .cloud-icon {
-      font-size: 52px;
-      z-index: 2;
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    
-    .cloud-card:hover .cloud-icon {
-      transform: rotate(12deg) scale(1.15);
-    }
-    
-    .cloud-card .cloud-info {
-      z-index: 2;
-    }
-    
-    .cloud-card .cloud-title {
-      font-size: 24px;
-      font-weight: 800;
-      font-family: 'Outfit', sans-serif;
-      background: linear-gradient(90deg, #FFFFFF, #E2E8F0);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      transition: background 0.3s ease;
-    }
-    
-    .cloud-card:hover .cloud-title {
-      background: linear-gradient(90deg, #00F5FF, #FF3366);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .cloud-card .cloud-desc {
-      color: #94A3B8;
-      margin-top: 6px;
-      line-height: 1.6;
-      font-size: 14.5px;
-      transition: color 0.3s ease;
-    }
-    
-    .cloud-card:hover .cloud-desc {
-      color: #CBD5E1;
-    }
-
-    footer {
-      text-align: center;
-      padding: 60px 24px 100px;
-      color: #64748B;
-      border-top: 1px solid rgba(255, 255, 255, 0.03);
-      background: linear-gradient(0deg, #0D131F, #0B0E14);
-    }
-    
-    footer a {
-      color: #38BDF8;
-      text-decoration: none;
-      transition: color 0.2s, text-shadow 0.2s;
-      font-weight: 500;
-    }
-    
-    footer a:hover {
-      color: #00F5FF;
-      text-decoration: underline;
-      text-shadow: 0 0 8px rgba(0, 245, 255, 0.3);
-    }
-    
-    /* Scroll Indicator hint */
-    .scroll-hint {
-      margin-top: 30px;
-      font-size: 13.5px;
-      color: #64748B;
-      font-weight: 500;
-      animation: bounce 2s infinite;
-    }
-    
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(-8px); }
-      60% { transform: translateY(-4px); }
-    }
-
-    /* Custom scrollbar styling */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #0B0E14; }
-    ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #334155; }
-    
-    /* Responsive Media Queries (Mobile & Tablet Optimization) */
-    @media (max-width: 900px) {
-      header {
-        padding: 60px 16px 30px;
-      }
-      
-      header h1 {
-        font-size: 36px;
-        letter-spacing: -1px;
-      }
-      
-      header p {
-        font-size: 14.5px;
-        margin-top: 12px;
-      }
-      
-      .badge {
-        font-size: 12.5px;
-        padding: 2px 6px;
-      }
-      
-      .scrolly {
-        flex-direction: column-reverse;
-        gap: 20px;
-        padding: 10px 16px 60px;
-      }
-      
-      .narr {
-        flex: none;
-        width: 100%;
-      }
-      
-      .sticky {
-        position: sticky;
-        top: 10px;
-        height: 52vh;
-        width: 100%;
-        z-index: 100;
-        border-radius: 16px;
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 245, 255, 0.05);
-      }
-      
-      .step {
-        min-height: auto;
-        padding: 24px;
-        margin: 40px 0;
-        border-radius: 14px;
-        opacity: 0.35;
-      }
-      
-      .step.is-active {
-        transform: scale(1.01);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 245, 255, 0.08);
-      }
-      
-      .step h3 {
-        font-size: 21px;
-      }
-      
-      .step p {
-        font-size: 14px;
-        margin-bottom: 14px;
-      }
-      
-      .roast {
-        padding: 14px 16px;
-      }
-      
-      .roast blockquote {
-        font-size: 12.5px;
-        padding: 6px 10px;
-      }
-      
-      .cloud-card {
-        flex-direction: column;
-        text-align: center;
-        padding: 24px 20px;
-        margin: 30px 16px;
-        gap: 14px;
-      }
-      
-      .cloud-card .cloud-icon {
-        font-size: 44px;
-      }
-      
-      .cloud-card .cloud-title {
-        font-size: 20px;
-      }
-      
-      .cloud-card .cloud-desc {
-        font-size: 13.5px;
-        margin-top: 4px;
-      }
-      
-      footer {
-        padding: 40px 16px 80px;
-        font-size: 13px;
-      }
-    }
-  </style>
+  /* Custom scrollbar styling */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #0B0E14; }
+  ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #334155; }
+</style>
 </head>
 <body>
-
-<div class="progress-bar-container">
-  <div class="progress-bar" id="myBar"></div>
-</div>
+<div class="progress-bar-container"><div class="progress-bar" id="myBar"></div></div>
 
 <header>
   <h1>Яндекс.Музыка 2026: что говорят отзывы</h1>
@@ -509,203 +217,48 @@
   <div class="scroll-hint">Листайте вниз ↓</div>
 </header>
 
-<main id="main-content">
-  <div class="scrolly">
-    <article class="narr">
-      
-      <section class="step" data-src="wow/racing.html">
-        <h3>🏁 Динамика тем по версиям</h3>
-        <p>Распределение ключевых тем в отзывах для каждой версии приложения. Показывает изменение интереса пользователей к редизайну, рекомендациям и другим аспектам от версии к версии.</p>
-        <div class="roast">
-          <div class="rt">💬 Отзывы об интерфейсе и дизайне</div>
-          <blockquote>«Всё прекрасно. Но. Кто дизайнер данного приложения? Символы стали неприятны глазу. То же сердечко сейчас выглядит хуже, чем было раньше. Шрифт вот интересный. Но остальное... Хотел…» <span>— 21.05.2026 · 181 👍 · 1★</span></blockquote>
-          <blockquote>«КРУТИТЕ БАРАБАН! Дизайнеры не в курсе, почему от дисковых телефонов люди перешли к панели где все кнопки видно сразу? Новый интерфейс просто шиза. Иконки частично чёткие, часть раз…» <span>— 22.05.2026 · 53 👍 · 1★</span></blockquote>
-          <blockquote>«Вы куда из приложения спрятали абсолютно ВСЁ?! А можно перестать набирать дизайнеров в пансионатах для умственно отсталых? Или хотя бы перевести их на вещества полегче.» <span>— 21.05.2026 · 30 👍 · 1★</span></blockquote>
-          <blockquote>«ребята, верните старый приятный интерфейс. у вас что, дизайнер под ЛСД или у него шизофрения? этим же стало невозможно пользоваться.» <span>— 17.05.2026 · 22 👍 · 2★</span></blockquote>
-        </div>
-      </section>
-      
-      <section class="step" data-src="wow/satisfaction.html">
-        <h3>📈 Распределение оценок по дням</h3>
-        <p>Процентное соотношение оценок от 1★ до 5★ на протяжении всего периода. Отражает динамику удовлетворенности пользователей по дням.</p>
-        <div class="roast">
-          <div class="rt">💬 Отзывы об обновлении</div>
-          <blockquote>«Последнее обновление просто дно. Испортили рабочий дизайн и концепцию, сделали полное позорище, лишь бы везде ИИ приплести.» <span>— 21.05.2026 · 1★</span></blockquote>
-          <blockquote>«Что за вредитель поганит ваши приложения? Сначала такси, сейчас изуродовали приложение музыки сделав его максимально запутанным и неудобным. Пропадает желание пользоваться.» <span>— 22.05.2026 · 1★</span></blockquote>
-          <blockquote>«последнее обновление дизайна - муйня полная... заканчивается месяц подписки, и я валю с этого сервиса... сами все испортили, к пользователям не прислушиваетесь, цены растут...» <span>— 28.05.2026 · 1★</span></blockquote>
-          <blockquote>«Последнее обновление отвратительно! Хочется поставить -5 звезд. Дизайн первой страницы просто худший из худших! У меня нет цензурных слов чтобы описать эмоции. Это ужас.» <span>— 21.05.2026 · 1★</span></blockquote>
-        </div>
-      </section>
-      
-      <section class="step" data-src="wow/tone.html">
-        <h3>🌡️ Средний тон отзывов по дням</h3>
-        <p>Общая тональность отзывов (от -1.0 до +1.0) по оценке ИИ-модели. Голубая линия показывает 7-дневное скользящее среднее тона на фоне дат выпуска новых версий.</p>
-        <div class="roast">
-          <div class="rt">💬 Комментарии пользователей</div>
-          <blockquote>«Вы просто испортили приложение последним обновлением. Лишний раз не хочется заходить и пользоваться, сплошной негатив.» <span>— 23.05.2026 · 1★</span></blockquote>
-          <blockquote>«Разработчики, ну вы сами всё испортили! К пользователям не прислушиваетесь, цены на подписку растут, а качество и удобство сервиса стремительно сжимается.» <span>— 27.05.2026 · 1★</span></blockquote>
-        </div>
-      </section>
-      
-      <section class="step" data-src="wow/river.html">
-        <h3>🌊 Поток тем во времени</h3>
-        <p>Абсолютный объем упоминания тем по неделям. Ширина полосы отражает количество отзывов, посвященных конкретной теме в этот период.</p>
-        <div class="roast">
-          <div class="rt">💬 Отзывы о каталоге и доступности треков</div>
-          <blockquote>«огромного количества музыки вырезали!Можете дальше соблюдать санкции, только без моих денег!Плюс зачем мне в Яндекс Музыке выбирать категории кэшбэка?! зачем вы перегружайте все св…» <span>— 06.01.2026 · 69 👍 · 1★</span></blockquote>
-          <blockquote>«Когда уже Яндекс взгреют за то, что они дерут деньги с подписчиков и не предоставляют взамен ничего! Кто знает, куда на них жаловаться?Это что за платформа такая?! Вечно удаляют ин…» <span>— 16.02.2026 · 60 👍 · 1★</span></blockquote>
-          <blockquote>«А начиналось так красиво, но цензура сделала своё, нет ну можно сделать род. контроль или возрастной рейтинг для песен(что-то подобное же и так у вас есть) или убрать цензуру для г…» <span>— 21.05.2026 · 41 👍 · 1★</span></blockquote>
-          <blockquote>«цензура» <span>— 02.03.2026 · 18 👍 · 1★</span></blockquote>
-        </div>
-      </section>
-      
-      <section class="step" data-src="wow/censorship.html">
-        <h3>🛡️ Динамика темы «Цензура» во времени</h3>
-        <p>Изменение доли отзывов о цензуре по неделям (в % от общего числа недельных отзывов). Позволяет сопоставить интерес пользователей к этой теме с датами выпуска новых версий.</p>
-        <div class="roast">
-          <div class="rt">💬 Отзывы о цензуре и ограничениях</div>
-          <blockquote>«А начиналось так красиво, но цензура сделала своё, нет ну можно сделать род. контроль или возрастной рейтинг для песен или убрать цензуру для взрослых.» <span>— 21.05.2026 · 41 👍 · 1★</span></blockquote>
-          <blockquote>«запикали маты в треках, убрали оригиналы, слушать невозможно. За что я плачу подписку — за кастрированную музыку?» <span>— 15.05.2026 · 1★</span></blockquote>
-        </div>
-      </section>
-      
-      <section class="step" data-src="wow/sunburst.html">
-        <h3>☀️ Структура тем внутри версий</h3>
-        <p>Иерархическая структура: версия → тема → подтема. Интерактивная диаграмма позволяет изучить состав отзывов для каждого релиза. Цвет отражает среднюю оценку.</p>
-        <div class="roast">
-          <div class="rt">💬 Отзывы о подписке и стоимости</div>
-          <blockquote>«Уважаемые, разрабы! Нахрена мне ваша подписка "Яндекс плюс", если я только музыку слушаю? зачем мне переплачивать за сервисы, которые мне не нужны? Очень прискорбно осознавать, что…» <span>— 23.01.2026 · 370 👍 · 1★</span></blockquote>
-          <blockquote>«После очередного подорожания,я уже не вижу смысла в использовании вашего сервиса.при всех его накопившихся минусах. введите вы уже наконец модульную подписку на те сервисы что нужн…» <span>— 21.05.2026 · 10 👍 · 1★</span></blockquote>
-          <blockquote>«Прям достали со своей рекламой, супер новинками предложениями и тд. Нельзя просто открыть приложение и включить музыку, надо вначале найти крестики на всплывающей рекламе, и это пр…» <span>— 22.05.2026 · 9 👍 · 1★</span></blockquote>
-          <blockquote>«1. Невозможно создать свой плейлист (нужна обученная обезьяна которая будет вручную добавлять альбомы по 1 треку) 2. Я не открываю приложение банка, чтобы послушать музыку. Как и н…» <span>— 27.02.2026 · 6 👍 · 1★</span></blockquote>
-        </div>
-      </section>
-      
-      <section class="step" data-src="wow/umap.html">
-        <h3>🎬 Изменение тональности отзывов</h3>
-        <p>Распределение отзывов в пространстве смыслов: от позитивных (зелёные сверху) до критических (красные снизу). Отражает смещение плотности отзывов во времени.</p>
-        <div class="roast">
-          <div class="rt">💬 Отзывы о рекомендациях и «Моей волне»</div>
-          <blockquote>«Мою волну стало невозможно слушать из-за тонн нейрослопа, уже устал дизлайки прожимать. Спасибо за чудесную причину не продлевать вашу бесполезную подписку ;)» <span>— 27.04.2026 · 92 👍 · 1★</span></blockquote>
-          <blockquote>«с каждым разом приложение все хуже и хуже, подписка стоит космических цен, а за такую цену получаем половину удаленных треков, волна не работает нормально, каждый раз крутит одни и…» <span>— 05.03.2026 · 16 👍 · 1★</span></blockquote>
-          <blockquote>«отвратительная волна, очень узкий круг песен и музыки , каждый день предлагает одно и то же,удалил все треки и почистил кеш приложения, чсеравно опять одни и те же треки, почему то…» <span>— 04.01.2026 · 16 👍 · 1★</span></blockquote>
-          <blockquote>«Все замечательно, но Моя волна по моей коллекции выдает одни и те же песни раз за разом.» <span>— 18.05.2026 · 15 👍 · 3★</span></blockquote>
-        </div>
-      </section>
-      
-    </article>
-    
-    <div class="sticky">
-      <!-- Premium loader animation while stacked iframes are parsing and loading in background -->
-      <div class="viz-loader">
-        <div class="spinner"></div>
-        <span>Загрузка интерактивной графики...</span>
-      </div>
-      <iframe id="viz-racing" class="viz-iframe active" src="wow/racing.html" title="Гонка тем по версиям"></iframe>
-      <iframe id="viz-satisfaction" class="viz-iframe" src="wow/satisfaction.html" title="Структура оценок по дням"></iframe>
-      <iframe id="viz-tone" class="viz-iframe" src="wow/tone.html" title="Средний тон отзывов по дням"></iframe>
-      <iframe id="viz-river" class="viz-iframe" src="wow/river.html" title="Поток жалоб во времени"></iframe>
-      <iframe id="viz-censorship" class="viz-iframe" src="wow/censorship.html" title="Цензура во времени"></iframe>
-      <iframe id="viz-sunburst" class="viz-iframe" src="wow/sunburst.html" title="Анатомия версии"></iframe>
-      <iframe id="viz-umap" class="viz-iframe" src="wow/umap.html" title="Дрейф тона"></iframe>
-    </div>
-  </div>
-</main>
+<div class="scrolly">
+  <div class="narr"><div class="step" data-src="wow/racing.html"><h3>🏁 Гонка жалоб по версиям</h3><p>Доля каждой темы в отзывах версии. Смотрите, как «Редизайн» вырывается вперёд на #135 и снова на #146–#147.</p><div class="roast"><div class="rt">🎨 Дизайнеру передать</div><blockquote>«я так понял, элементы управление тоже цензурой скрыли? или у вас там дизайнер представитель запрещённого сообщества? иным образом объяснить это уродство невозможно. сервис и так сь…» <span>— 27.05.2026 · 14 👍 · 1★</span></blockquote><blockquote>«Убрали крайне важную функцию треков с устройства. Уволить того кто предложил и одобрил эту глупейшие идею.» <span>— 28.02.2026 · 3 👍 · 1★</span></blockquote><blockquote>«изменяю отзыв с 3х до 1й звезды. разработчиков надо уволить поголовно. с каждым обновлением все хуже и хуже. раньше можно было быстро и легко найти кнопку Треки с устройства. сейча…» <span>— 23.02.2026 · 2 👍 · 1★</span></blockquote><blockquote>«Вы там что курите? Вы что с плеером сделали? Сами то пользуетесь? Вы туда еще магазин на диване добавьте и ставки на спорт, пока музыку включишь, слушать уже не хочется.» <span>— 27.05.2026 · 1 👍 · 1★</span></blockquote></div></div><div class="step" data-src="wow/river.html"><h3>🌊 Поток жалоб во времени</h3><p>Толщина потока — объём темы. Видно, как русла «Редизайн», «Цензура» и «Платность» разбухают к новым релизам.</p><div class="roast"><div class="rt">✂️ Цензорам передать</div><blockquote>«стало просто дно! только интерфейс обновили. песен новых нет, видимо из-за санкций. очень часто повторы одних и тех же композиций. служба поддержки не работает!» <span>— 21.05.2026 · 53 👍 · 1★</span></blockquote><blockquote>«А начиналось так красиво, но цензура сделала своё, нет ну можно сделать род. контроль или возрастной рейтинг для песен(что-то подобное же и так у вас есть) или убрать цензуру для г…» <span>— 21.05.2026 · 41 👍 · 1★</span></blockquote><blockquote>«красавы, всё перебанили, всё запикали, цены задрали сидят довольные» <span>— 02.03.2026 · 33 👍 · 1★</span></blockquote><blockquote>«вижу везде плюсы в этом приложении. но есть главные минусы, которые убрали в последующих обновлениях, а точнее: 1. из-за санкций большая часть музыки оказалась под запретом, из-за …» <span>— 27.02.2026 · 19 👍 · 4★</span></blockquote></div></div><div class="step" data-src="wow/sunburst.html"><h3>☀️ Анатомия версии</h3><p>Версия → тема → подтема. Кликайте внутрь: из чего состоит недовольство каждого релиза. Цвет — средняя оценка.</p><div class="roast"><div class="rt">💸 Маркетологам передать</div><blockquote>«очень жадный сервис» <span>— 07.03.2026 · 1 👍 · 2★</span></blockquote><blockquote>«за жадность» <span>— 12.03.2026 · 0 👍 · 1★</span></blockquote><blockquote>«космическая скорость.работают все сервисы» <span>— 08.03.2026 · 0 👍 · 5★</span></blockquote></div></div><div class="step" data-src="wow/umap.html"><h3>🎬 Дрейф тона</h3><p>От нулевой линии вверх — позитив (зелёное), вниз — критика (красное). Слева направо зелёное усыхает, красное разбухает — «вода уходит под ноль». Белая линия — средняя оценка, ныряет на #135 и #147. Снизу — термометр среднего тона.</p><div class="roast"><div class="rt">🌊 Алгоритму «Моей волны»</div></div></div></div>
+  <div class="sticky"><iframe id="viz" src="wow/racing.html"></iframe></div>
+</div>
 
-<a href="cloud_deckgl.html" target="_blank" rel="noopener" id="btn-3d-cloud" class="cloud-card">
-  <div class="cloud-icon">🌌</div>
-  <div class="cloud-info">
-    <div class="cloud-title">3D-облако мнений</div>
-    <div class="cloud-desc">16 472 отзыва в пространстве смысла: вращайте, зумьте, наводитесь на точки. Откроется на весь экран в новой вкладке →</div>
-  </div>
-</a>
+  <a href="cloud_deckgl.html" target="_blank" rel="noopener" style="display:flex;gap:18px;align-items:center;max-width:900px;margin:34px auto;padding:24px 30px;background:linear-gradient(135deg,#171c24,#0f1420);border:1px solid #2a3340;border-radius:18px;text-decoration:none;color:#e8edf3;box-shadow:0 10px 40px rgba(0,0,0,.4)">
+    <div style="font-size:50px">🌌</div>
+    <div><div style="font-size:23px;font-weight:800;font-family:Outfit,Inter,sans-serif">3D-облако мнений</div>
+    <div style="color:#9aa4b2;margin-top:5px;line-height:1.5">16 472 отзыва в пространстве смысла: вращайте, зумьте, наводитесь на точки. Откроется на весь экран в новой вкладке →</div></div>
+  </a>
 
 <footer>
-  Отзывы Google Play · январь–май 2026 · 16 472 отзыва · <a href="cloud_deckgl.html">🌌 3D-облако мнений</a>
+  <a href="index.html">🏠 Все разборы</a> · <a href="dashboard.html">Полный дашборд</a> · <a href="dashboard_story.html">Сторителлинг по рубрикам</a>
 </footer>
 
 <script>
-  // Optimized scroll event with passive listener & requestAnimationFrame for perfect scroll performance
-  let scrollTicking = false;
-  const progressBar = document.getElementById('myBar');
+window.addEventListener('scroll', () => {
+  const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  document.getElementById('myBar').style.width = scrolled + '%';
+});
 
-  window.addEventListener('scroll', () => {
-    if (!scrollTicking) {
-      window.requestAnimationFrame(() => {
-        const winScroll = window.scrollY || document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-        progressBar.style.width = scrolled + '%';
-        scrollTicking = false;
-      });
-      scrollTicking = true;
-    }
-  }, { passive: true });
-
-  // Preloader management for all stacked iframes
-  let loadedIframes = 0;
-  const totalIframes = 7;
-  const loader = document.querySelector('.viz-loader');
-
-  document.querySelectorAll('.viz-iframe').forEach(iframe => {
-    // Check if cache already loaded it
-    if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
-      handleIframeLoad();
-    } else {
-      iframe.addEventListener('load', handleIframeLoad);
-    }
-  });
-
-  function handleIframeLoad() {
-    loadedIframes++;
-    if (loadedIframes >= totalIframes) {
-      if (loader) {
-        loader.style.opacity = '0';
-        setTimeout(() => {
-          loader.style.display = 'none';
-        }, 400);
-      }
-    }
+const viz=document.getElementById('viz');
+const sc=scrollama();
+sc.setup({step:'.step',offset:0.55}).onStepEnter(r=>{
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('is-active'));
+  r.element.classList.add('is-active');
+  const src=r.element.dataset.src;
+  if(viz.getAttribute('src')!==src) {
+    viz.classList.add('loading');
+    setTimeout(() => {
+      viz.setAttribute('src',src);
+    }, 150);
   }
+});
 
-  // Scrollama setup to smoothly transition stacked frames
-  const sc = scrollama();
-  sc.setup({
-    step: '.step',
-    offset: 0.55
-  }).onStepEnter(r => {
-    // Toggle active state classes for step narratives
-    document.querySelectorAll('.step').forEach(s => s.classList.remove('is-active'));
-    r.element.classList.add('is-active');
-    
-    // Toggle active iframe based on step data-src
-    const src = r.element.dataset.src;
-    let targetId = 'viz-racing';
-    
-    if (src.includes('satisfaction')) {
-      targetId = 'viz-satisfaction';
-    } else if (src.includes('tone')) {
-      targetId = 'viz-tone';
-    } else if (src.includes('censorship')) {
-      targetId = 'viz-censorship';
-    } else if (src.includes('river')) {
-      targetId = 'viz-river';
-    } else if (src.includes('sunburst')) {
-      targetId = 'viz-sunburst';
-    } else if (src.includes('umap')) {
-      targetId = 'viz-umap';
-    }
-    
-    document.querySelectorAll('.viz-iframe').forEach(iframe => {
-      if (iframe.id === targetId) {
-        iframe.classList.add('active');
-      } else {
-        iframe.classList.remove('active');
-      }
-    });
-  });
+viz.addEventListener('load', () => {
+  viz.classList.remove('loading');
+});
 
-  window.addEventListener('resize', sc.resize);
+window.addEventListener('resize',sc.resize);
 </script>
 </body>
 </html>
